@@ -15,21 +15,15 @@ const iconv = require('iconv-lite');
 const https = require('https')
 var BufferHelper = require('bufferhelper');
 
-// request({
-// 	hostname: 'trade.500.com',
-// 	port: '443',
-// 	method: 'get',
-// 	path:'https://trade.500.com/jczq/?playid=270&g=2&date=2019-12-18',
-// },function(res){
-// 	console.log(333)
-// 	var datas = [];
-// 	res.on('data',function(buffer){
-// 		datas.push(buffer);
-// 	});
-// 	res.on('end',function () {
-// 		console.log(iconv.decode(Buffer.concat(datas),'GBK'))
-// 	})
-// })
+request({
+  encoding: null,
+	url:'https://trade.500.com/jczq/?playid=270&g=2&date=2019-12-18',
+},function(err, res, body){
+  if(!err && res.statusCode === 200 && body){
+    console.log(iconv.decode(body, 'gb18030').toString())
+  }else{
+  }
+})
 
 // let req = request.get('https://trade.500.com/jczq/?playid=270&g=2&date=2019-12-18')
 // req.on('response',function(res){
@@ -50,22 +44,22 @@ var BufferHelper = require('bufferhelper');
 
 
 
-axios({
-	method: 'get',
-	url: 'https://trade.500.com/jczq/?playid=270&g=2&date=2019-12-18',
-	// responseType: 'blob',
-	// transformResponse: [function (data) {
-	// 	// console.log(data)
-	// 	let buffer = new Buffer.from(data)
-	// 	console.log(buffer)
-	// 	var str = iconv.decode(buffer, 'gbk')
-	// 	console.log(str)
-	// 	// console.log(buffer.toString('utf16le'))
-	//
-	// }]
-}).then((res) => {
-	console.log(res)
-})
+// axios({
+// 	method: 'get',
+// 	url: 'https://trade.500.com/jczq/?playid=270&g=2&date=2019-12-18',
+// 	// responseType: 'blob',
+// 	// transformResponse: [function (data) {
+// 	// 	// console.log(data)
+// 	// 	let buffer = new Buffer.from(data)
+// 	// 	console.log(buffer)
+// 	// 	var str = iconv.decode(buffer, 'gbk')
+// 	// 	console.log(str)
+// 	// 	// console.log(buffer.toString('utf16le'))
+// 	//
+// 	// }]
+// }).then((res) => {
+// 	console.log(res)
+// })
 
 //
 // request('https://trade.500.com/jczq/?playid=270&g=2&date=2019-12-18', (err, res, body) => {
